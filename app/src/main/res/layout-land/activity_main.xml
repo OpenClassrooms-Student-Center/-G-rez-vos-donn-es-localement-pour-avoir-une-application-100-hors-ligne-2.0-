@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity_coordinator_layout"
@@ -60,7 +60,7 @@
 
             <!-- BUTTON TRIP BOOK -->
             <Button
-                android:id="@+id/main_activity_button_trip_book"
+                android:id="@+id/mainActivityButtonTripBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title_trip_book"
@@ -88,4 +88,4 @@
 
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

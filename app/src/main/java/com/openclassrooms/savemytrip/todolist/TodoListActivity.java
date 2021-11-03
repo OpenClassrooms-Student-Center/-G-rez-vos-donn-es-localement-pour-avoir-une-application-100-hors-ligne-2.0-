@@ -1,52 +1,45 @@
 package com.openclassrooms.savemytrip.todolist;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.openclassrooms.savemytrip.R;
-import com.openclassrooms.savemytrip.base.BaseActivity;
+import com.openclassrooms.savemytrip.databinding.ActivityTodoListBinding;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
-public class TodoListActivity extends BaseActivity {
-
-    // FOR DESIGN
-    @BindView(R.id.todo_list_activity_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.todo_list_activity_spinner) Spinner spinner;
-    @BindView(R.id.todo_list_activity_edit_text) EditText editText;
-    @BindView(R.id.todo_list_activity_header_profile_image) ImageView profileImage;
-    @BindView(R.id.todo_list_activity_header_profile_text) TextView profileText;
-
-    @Override
-    public int getLayoutContentViewID() { return R.layout.activity_todo_list; }
+public class TodoListActivity extends AppCompatActivity {
+    private ActivityTodoListBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.configureToolbar();
-        this.configureSpinner();
+        binding = ActivityTodoListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initView();
     }
-
-    // -------------------
-    // ACTIONS
-    // -------------------
-
-    @OnClick(R.id.todo_list_activity_button_add)
-    public void onClickAddButton() { /*TODO*/ }
 
     // -------------------
     // UI
     // -------------------
 
-    private void configureSpinner(){
+    private void initView() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        configureSpinner();
+        binding.todoListActivityButtonAdd.setOnClickListener(view -> {
+            /*TODO*/
+        });
+    }
+
+    private void configureSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        binding.todoListActivitySpinner.setAdapter(adapter);
     }
 }

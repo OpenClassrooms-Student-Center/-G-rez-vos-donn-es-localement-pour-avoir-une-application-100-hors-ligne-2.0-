@@ -15,6 +15,7 @@
         <!-- MAIN_ACTIVITY -->
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoTitle"> <!-- DISABLE TOOLBAR & ROTATION -->
 
             <intent-filter>
@@ -27,12 +28,14 @@
         <activity
             android:name=".tripbook.TripBookActivity"
             android:label="@string/title_trip_book"
+            android:exported="false"
             android:parentActivityName=".MainActivity" />
 
         <!-- TODOLIST ACTIVITY -->
         <activity
             android:name=".todolist.TodoListActivity"
             android:label="@string/title_todo_list"
+            android:exported="false"
             android:parentActivityName=".MainActivity"/>
 
     </application>
