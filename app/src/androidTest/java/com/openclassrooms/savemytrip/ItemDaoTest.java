@@ -1,9 +1,9 @@
 package com.openclassrooms.savemytrip;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
-import android.arch.persistence.room.Room;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.room.Room;
+import androidx.test.platform.app.*;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.openclassrooms.savemytrip.database.SaveMyTripDatabase;
 import com.openclassrooms.savemytrip.models.Item;
@@ -29,18 +29,18 @@ public class ItemDaoTest {
     private SaveMyTripDatabase database;
 
     // DATA SET FOR TEST
-    private static long USER_ID = 1;
-    private static User USER_DEMO = new User(USER_ID, "Philippe", "https://www.google.fr, ");
-    private static Item NEW_ITEM_PLACE_TO_VISIT = new Item("Visite cet endroit de rêve !", 0, USER_ID);
-    private static Item NEW_ITEM_IDEA = new Item("On pourrait faire du chien de traîneau ?", 1, USER_ID);
-    private static Item NEW_ITEM_RESTAURANTS = new Item("Ce restaurant à l'air sympa", 2, USER_ID);
+    private static final long USER_ID = 1;
+    private static final User USER_DEMO = new User(USER_ID, "Philippe", "https://www.google.fr, ");
+    private static final Item NEW_ITEM_PLACE_TO_VISIT = new Item("Visite cet endroit de rêve !", 0, USER_ID);
+    private static final Item NEW_ITEM_IDEA = new Item("On pourrait faire du chien de traîneau ?", 1, USER_ID);
+    private static final Item NEW_ITEM_RESTAURANTS = new Item("Ce restaurant à l'air sympa", 2, USER_ID);
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Before
     public void initDb() throws Exception {
-        this.database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
+        this.database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().getContext(),
                 SaveMyTripDatabase.class)
                 .allowMainThreadQueries()
                 .build();

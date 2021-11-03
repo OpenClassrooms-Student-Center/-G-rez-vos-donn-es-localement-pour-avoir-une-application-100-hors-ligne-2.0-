@@ -5,8 +5,9 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.openclassrooms.savemytrip.database.SaveMyTripDatabase;
 import com.openclassrooms.savemytrip.models.Item;
@@ -22,13 +23,15 @@ public class ItemContentProvider extends ContentProvider {
     public static final Uri URI_ITEM = Uri.parse("content://" + AUTHORITY + "/" + TABLE_NAME);
 
     @Override
-    public boolean onCreate() { return true; }
+    public boolean onCreate() {
+        return true;
+    }
 
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
-        if (getContext() != null){
+        if (getContext() != null) {
             long userId = ContentUris.parseId(uri);
             final Cursor cursor = SaveMyTripDatabase.getInstance(getContext()).itemDao().getItemsWithCursor(userId);
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -48,9 +51,9 @@ public class ItemContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
 
-        if (getContext() != null){
+        if (getContext() != null && contentValues != null) {
             final long id = SaveMyTripDatabase.getInstance(getContext()).itemDao().insertItem(Item.fromContentValues(contentValues));
-            if (id != 0){
+            if (id != 0) {
                 getContext().getContentResolver().notifyChange(uri, null);
                 return ContentUris.withAppendedId(uri, id);
             }
@@ -61,7 +64,7 @@ public class ItemContentProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        if (getContext() != null){
+        if (getContext() != null) {
             final int count = SaveMyTripDatabase.getInstance(getContext()).itemDao().deleteItem(ContentUris.parseId(uri));
             getContext().getContentResolver().notifyChange(uri, null);
             return count;
@@ -71,7 +74,7 @@ public class ItemContentProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        if (getContext() != null){
+        if (getContext() != null && contentValues != null) {
             final int count = SaveMyTripDatabase.getInstance(getContext()).itemDao().updateItem(Item.fromContentValues(contentValues));
             getContext().getContentResolver().notifyChange(uri, null);
             return count;

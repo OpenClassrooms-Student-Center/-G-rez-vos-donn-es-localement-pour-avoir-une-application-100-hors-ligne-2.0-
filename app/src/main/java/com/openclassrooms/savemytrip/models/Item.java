@@ -1,9 +1,10 @@
 package com.openclassrooms.savemytrip.models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
 import android.content.ContentValues;
+
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by Philippe on 08/03/2018.
@@ -13,7 +14,6 @@ import android.content.ContentValues;
         parentColumns = "id",
         childColumns = "userId"))
 public class Item {
-
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String text;
@@ -21,28 +21,57 @@ public class Item {
     private Boolean isSelected;
     private long userId;
 
-    public Item() { }
+    public Item() {
+    }
 
-    public Item(String text, int category, long userID) {
+    public Item(String text, int category, long userId) {
         this.text = text;
         this.category = category;
-        this.userId = userID;
+        this.userId = userId;
         this.isSelected = false;
     }
 
     // --- GETTER ---
-    public long getId() { return id; }
-    public String getText() { return text; }
-    public int getCategory() { return category; }
-    public Boolean getSelected() { return isSelected; }
-    public long getUserId() { return userId; }
+    public long getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
 
     // --- SETTER ---
-    public void setId(long id) { this.id = id; }
-    public void setText(String text) { this.text = text; }
-    public void setCategory(int category) { this.category = category; }
-    public void setSelected(Boolean selected) { isSelected = selected; }
-    public void setUserId(long userId) { this.userId = userId; }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     // --- UTILS ---
     public static Item fromContentValues(ContentValues values) {

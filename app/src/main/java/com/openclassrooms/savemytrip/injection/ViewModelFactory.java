@@ -1,13 +1,19 @@
 package com.openclassrooms.savemytrip.injection;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import android.content.Context;
 
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.openclassrooms.savemytrip.database.SaveMyTripDatabase;
 import com.openclassrooms.savemytrip.repositories.ItemDataRepository;
 import com.openclassrooms.savemytrip.repositories.UserDataRepository;
 import com.openclassrooms.savemytrip.todolist.ItemViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Philippe on 27/02/2018.
@@ -20,14 +26,16 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private final UserDataRepository userDataSource;
     private final Executor executor;
 
-    public ViewModelFactory(ItemDataRepository itemDataSource, UserDataRepository userDataSource, Executor executor) {
-        this.itemDataSource = itemDataSource;
-        this.userDataSource = userDataSource;
-        this.executor = executor;
+    public ViewModelFactory(Context context) {
+        SaveMyTripDatabase database = SaveMyTripDatabase.getInstance(context);
+        this.itemDataSource = new ItemDataRepository(database.itemDao());
+        this.userDataSource = new UserDataRepository(database.userDao());
+        this.executor = Executors.newSingleThreadExecutor();
     }
 
     @Override
-    public <T extends ViewModel> T create(Class<T> modelClass) {
+    @NotNull
+    public <T extends ViewModel>  T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ItemViewModel.class)) {
             return (T) new ItemViewModel(itemDataSource, userDataSource, executor);
         }

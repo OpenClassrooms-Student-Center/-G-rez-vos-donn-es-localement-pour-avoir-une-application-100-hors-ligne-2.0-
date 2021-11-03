@@ -31,6 +31,8 @@
     <!-- TODOLIST ACTIVITY -->
     <string name="todolist_things_todo">Ajouter une chose à faire&#8230;</string>
     <string name="todolist_button_add">Ajouter</string>
+    <string name="parameters">Paramètres</string>
+    <string name="your_diary_travel">Ton carnet de voyage</string>
     <string-array name="category_array">
         <item>A visiter</item>
         <item>Idées</item>

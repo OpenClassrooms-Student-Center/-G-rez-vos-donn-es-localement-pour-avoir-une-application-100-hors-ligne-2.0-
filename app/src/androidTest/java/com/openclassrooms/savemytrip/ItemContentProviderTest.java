@@ -1,15 +1,17 @@
 package com.openclassrooms.savemytrip;
 
-import android.arch.persistence.room.Room;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.room.Room;
+import androidx.test.platform.app.*;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.openclassrooms.savemytrip.database.SaveMyTripDatabase;
+import com.openclassrooms.savemytrip.models.User;
 import com.openclassrooms.savemytrip.provider.ItemContentProvider;
 
 import org.junit.Before;
@@ -31,15 +33,16 @@ public class ItemContentProviderTest {
     private ContentResolver mContentResolver;
 
     // DATA SET FOR TEST
-    private static long USER_ID = 1;
+    private static final long USER_ID = 1;
+    private static final User USER_DEMO = new User(USER_ID, "Philippe", "https://www.google.fr, ");
 
     @Before
     public void setUp() {
-        Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
+        Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().getContext(),
                 SaveMyTripDatabase.class)
                 .allowMainThreadQueries()
                 .build();
-        mContentResolver = InstrumentationRegistry.getContext().getContentResolver();
+        mContentResolver = InstrumentationRegistry.getInstrumentation().getContext().getContentResolver();
     }
 
     @Test
@@ -69,7 +72,9 @@ public class ItemContentProviderTest {
         values.put("text", "Visite cet endroit de rêve !");
         values.put("category", "0");
         values.put("isSelected", "false");
-        values.put("userId", "1");
+        values.put("user_id", USER_DEMO.getId());
+        values.put("user_username", USER_DEMO.getUsername());
+        values.put("user_urlPicture", USER_DEMO.getUrlPicture());
         return values;
     }
 }

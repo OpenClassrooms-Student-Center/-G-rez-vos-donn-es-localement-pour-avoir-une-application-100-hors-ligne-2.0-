@@ -1,13 +1,14 @@
 package com.openclassrooms.savemytrip.todolist;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.savemytrip.models.Item;
 import com.openclassrooms.savemytrip.models.User;
 import com.openclassrooms.savemytrip.repositories.ItemDataRepository;
 import com.openclassrooms.savemytrip.repositories.UserDataRepository;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -44,7 +45,9 @@ public class ItemViewModel extends ViewModel {
     // FOR USER
     // -------------
 
-    public LiveData<User> getUser(long userId) { return this.currentUser;  }
+    public LiveData<User> getUser() {
+        return this.currentUser;
+    }
 
     // -------------
     // FOR ITEM
@@ -54,21 +57,17 @@ public class ItemViewModel extends ViewModel {
         return itemDataSource.getItems(userId);
     }
 
-    public void createItem(Item item) {
+    public void createItem(String text, int category, long userId) {
         executor.execute(() -> {
-            itemDataSource.createItem(item);
+            itemDataSource.createItem(new Item(text, category, userId));
         });
     }
 
     public void deleteItem(long itemId) {
-        executor.execute(() -> {
-            itemDataSource.deleteItem(itemId);
-        });
+        executor.execute(() -> itemDataSource.deleteItem(itemId));
     }
 
     public void updateItem(Item item) {
-        executor.execute(() -> {
-            itemDataSource.updateItem(item);
-        });
+        executor.execute(() -> itemDataSource.updateItem(item));
     }
 }

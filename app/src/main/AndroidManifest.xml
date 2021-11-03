@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.openclassrooms.savemytrip">
 
     <!-- ENABLE PERMISSIONS ABOUT EXTERNAL STORAGE ACCESS -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -17,6 +19,7 @@
         <!-- MAIN_ACTIVITY -->
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoTitle"> <!-- DISABLE TOOLBAR & ROTATION -->
 
             <intent-filter>
@@ -27,7 +30,7 @@
 
         <!-- FileProvider - Expose File -->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.openclassrooms.savemytrip.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -39,20 +42,22 @@
         <!-- TRIP_BOOK ACTIVITY -->
         <activity
             android:name=".tripbook.TripBookActivity"
+            android:exported="false"
             android:label="@string/title_trip_book"
             android:parentActivityName=".MainActivity" />
 
         <!-- TODOLIST ACTIVITY -->
         <activity
             android:name=".todolist.TodoListActivity"
+            android:exported="false"
             android:label="@string/title_todo_list"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
 
         <!-- CONTENT PROVIDER -->
         <provider
             android:name=".provider.ItemContentProvider"
             android:authorities="com.openclassrooms.savemytrip.provider"
-            android:exported="true"/>
+            android:exported="true" />
 
     </application>
 

@@ -1,31 +1,30 @@
 package com.openclassrooms.savemytrip;
 
 import android.content.Intent;
+import android.os.Bundle;
 
-import com.openclassrooms.savemytrip.base.BaseActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.openclassrooms.savemytrip.databinding.ActivityMainBinding;
 import com.openclassrooms.savemytrip.todolist.TodoListActivity;
 import com.openclassrooms.savemytrip.tripbook.TripBookActivity;
 
-import butterknife.OnClick;
-
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
     @Override
-    public int getLayoutContentViewID() { return R.layout.activity_main; }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-    // --------------------
-    // ACTIONS
-    // --------------------
-
-    @OnClick(R.id.main_activity_button_trip_book)
-    public void onClickTripBookButton() {
-        Intent intent = new Intent(this, TripBookActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.main_activity_button_todo_list)
-    public void onClickTodoListButton() {
-        Intent intent = new Intent(this, TodoListActivity.class);
-        startActivity(intent);
+        binding.mainActivityButtonTripBook.setOnClickListener(view -> {
+            Intent intent = new Intent(this, TripBookActivity.class);
+            startActivity(intent);
+        });
+        binding.mainActivityButtonTodoList.setOnClickListener(view -> {
+            Intent intent = new Intent(this, TodoListActivity.class);
+            startActivity(intent);
+        });
     }
 }
