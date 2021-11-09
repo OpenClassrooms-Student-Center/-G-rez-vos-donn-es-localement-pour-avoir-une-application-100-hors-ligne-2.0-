@@ -11,7 +11,6 @@ import androidx.test.platform.app.*;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.openclassrooms.savemytrip.database.SaveMyTripDatabase;
-import com.openclassrooms.savemytrip.models.User;
 import com.openclassrooms.savemytrip.provider.ItemContentProvider;
 
 import org.junit.Before;
@@ -34,7 +33,6 @@ public class ItemContentProviderTest {
 
     // DATA SET FOR TEST
     private static final long USER_ID = 1;
-    private static final User USER_DEMO = new User(USER_ID, "Philippe", "https://www.google.fr, ");
 
     @Before
     public void setUp() {
@@ -72,9 +70,7 @@ public class ItemContentProviderTest {
         values.put("text", "Visite cet endroit de rêve !");
         values.put("category", "0");
         values.put("isSelected", "false");
-        values.put("user_id", USER_DEMO.getId());
-        values.put("user_username", USER_DEMO.getUsername());
-        values.put("user_urlPicture", USER_DEMO.getUrlPicture());
+        values.put("userId", 1);
         return values;
     }
 }
