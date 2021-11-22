@@ -53,8 +53,7 @@ public class TodoListActivity extends AppCompatActivity implements ItemAdapter.L
     // -------------------
 
     private void configureViewModel() {
-        ViewModelFactory mViewModelFactory = new ViewModelFactory(this);
-        this.itemViewModel = new ViewModelProvider(this, mViewModelFactory).get(ItemViewModel.class);
+        this.itemViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance(this)).get(ItemViewModel.class);
         this.itemViewModel.init(USER_ID);
     }
 
