@@ -26,7 +26,20 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private final UserDataRepository userDataSource;
     private final Executor executor;
 
-    public ViewModelFactory(Context context) {
+    private static ViewModelFactory factory;
+
+    public static ViewModelFactory getInstance(Context context) {
+        if (factory == null) {
+            synchronized (ViewModelFactory.class) {
+                if (factory == null) {
+                    factory = new ViewModelFactory(context);
+                }
+            }
+        }
+        return factory;
+    }
+
+    private ViewModelFactory(Context context) {
         SaveMyTripDatabase database = SaveMyTripDatabase.getInstance(context);
         this.itemDataSource = new ItemDataRepository(database.itemDao());
         this.userDataSource = new UserDataRepository(database.userDao());
@@ -35,7 +48,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
 
     @Override
     @NotNull
-    public <T extends ViewModel>  T create(Class<T> modelClass) {
+    public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ItemViewModel.class)) {
             return (T) new ItemViewModel(itemDataSource, userDataSource, executor);
         }
