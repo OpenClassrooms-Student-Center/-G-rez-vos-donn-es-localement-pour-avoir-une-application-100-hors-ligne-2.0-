@@ -4,6 +4,7 @@ import android.content.ContentValues;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -21,6 +22,7 @@ public class Item {
     private Boolean isSelected;
     private long userId;
 
+    @Ignore
     public Item() {
     }
 
