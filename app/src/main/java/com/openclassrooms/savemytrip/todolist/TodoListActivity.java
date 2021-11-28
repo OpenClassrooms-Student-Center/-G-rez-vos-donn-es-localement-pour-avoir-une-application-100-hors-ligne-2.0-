@@ -111,6 +111,7 @@ public class TodoListActivity extends AppCompatActivity implements ItemAdapter.L
     }
 
     private void updateView(User user) {
+        if (user == null) return;
         binding.todoListActivityHeaderProfileText.setText(user.getUsername());
         Glide.with(this).load(user.getUrlPicture()).apply(RequestOptions.circleCropTransform()).into(binding.todoListActivityHeaderProfileImage);
     }
