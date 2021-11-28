@@ -1,18 +1,15 @@
 package com.openclassrooms.savemytrip.database;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
 import com.openclassrooms.savemytrip.database.dao.ItemDao;
 import com.openclassrooms.savemytrip.database.dao.UserDao;
 import com.openclassrooms.savemytrip.models.Item;
 import com.openclassrooms.savemytrip.models.User;
-
 import java.util.concurrent.Executors;
 
 /**
@@ -50,7 +47,9 @@ public abstract class SaveMyTripDatabase extends RoomDatabase {
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
-                Executors.newSingleThreadExecutor().execute(() -> INSTANCE.userDao().createUser(new User(1, "Philippe", "https://oc-user.imgix.net/users/avatars/15175844164713_frame_523.jpg?auto=compress,format&q=80&h=100&dpr=2")));
+                Executors.newSingleThreadExecutor().execute(() -> INSTANCE.userDao().createUser(
+                        new User(1, "David",
+                                "https://yt3.ggpht.com/ytc/AKedOLQQHbpndYbax4IGSxtVPYY5WLihYQtBYzyMU5Lbbvc=s176-c-k-c0x00ffffff-no-rj")));
             }
         };
     }
