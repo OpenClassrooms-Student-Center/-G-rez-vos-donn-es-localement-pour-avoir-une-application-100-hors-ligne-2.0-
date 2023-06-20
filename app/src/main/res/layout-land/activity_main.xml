@@ -60,7 +60,7 @@
 
             <!-- BUTTON TRIP BOOK -->
             <Button
-                android:id="@+id/mainActivityButtonTripBook"
+                android:id="@+id/main_activity_button_trip_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title_trip_book"
